@@ -10,16 +10,27 @@
   "categories": [
     "Other"
   ],
-  "activationEvents": [],
+  "activationEvents": [
+  ],
   "main": "./out/extension.js",
   "contributes": {
     "commands": [
       {
         "command": "liquidplayground.openLiquidPlayground",
-        "title": "Open Liquid Playground"
+        "title": "Open In Liquid Playground"
       }
-    ]
+    ],
+    "menus": {
+      "explorer/context": [
+      {
+        "command": "liquidplayground.openLiquidPlayground",
+        "when": "resourceLangId == liquid",
+        "group": "navigation"
+      }
+      ]
+    }
   },
+  
   "scripts": {
     "vscode:prepublish": "npm run compile",
     "compile": "tsc -p ./",
