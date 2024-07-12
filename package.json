@@ -3,15 +3,14 @@
   "displayName": "Liquid Playground",
   "description": "An extension that enables you to directly interact with liquid from VSCode.",
   "publisher": "evlian",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "engines": {
     "vscode": "^1.90.0"
   },
   "categories": [
     "Other"
   ],
-  "activationEvents": [
-  ],
+  "activationEvents": [],
   "main": "./out/extension.js",
   "contributes": {
     "commands": [
@@ -22,15 +21,14 @@
     ],
     "menus": {
       "explorer/context": [
-      {
-        "command": "liquidplayground.openLiquidPlayground",
-        "when": "resourceLangId == liquid",
-        "group": "navigation"
-      }
+        {
+          "command": "liquidplayground.openLiquidPlayground",
+          "when": "resourceLangId == liquid",
+          "group": "navigation"
+        }
       ]
     }
   },
-  
   "scripts": {
     "vscode:prepublish": "npm run compile",
     "compile": "tsc -p ./",
