@@ -1,6 +1,6 @@
 # Liquid Playground
 
-![Liquid Playground Logo](images/logo.png)
+![Liquid Playground Logo](https://assets-global.website-files.com/64be309a0c8ae7454454fcef/653932043d90a3fa696fd68a_liquid-logo-text.png)
 
 An extension for Visual Studio Code that allows you to interactively work with Liquid templates and data.
 
