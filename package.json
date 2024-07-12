@@ -1,7 +1,8 @@
 {
   "name": "liquidplayground",
   "displayName": "Liquid Playground",
-  "description": "An extension that enables you to directly interact with liquid from VSCode.",
+  "description": "An extension that enables you to interact with liquid directly from VSCode.",
+  "icon": "images/logo.png",
   "publisher": "evlian",
   "version": "1.0.0",
   "engines": {
