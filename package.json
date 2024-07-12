@@ -3,7 +3,7 @@
   "displayName": "Liquid Playground",
   "description": "An extension that enables you to directly interact with liquid from VSCode.",
   "publisher": "evlian",
-  "version": "0.2.0",
+  "version": "1.0.0",
   "engines": {
     "vscode": "^1.90.0"
   },
