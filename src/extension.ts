@@ -64,10 +64,72 @@ async function renderLiquidTemplate(templateFilePath: string, liquidTemplate: st
         // Determine the parent folder of the template file
         let templateRootFilePath = path.dirname(templateFilePath).replace('/c:', 'c:');
         
-        // Initialize Liquid engine with the root directory
         const engine = new Liquid({
             root: [templateRootFilePath],
-            extname: '.liquid'
+            extname: 'liquid',
+            fs: {
+                async exists(filepath: string): Promise<boolean> {
+                    
+
+                    return new Promise((resolve) => {
+                        fs.access(filepath, fs.constants.F_OK, (err) => {
+                            resolve(!err);
+                        });
+                    });
+                },
+
+                existsSync(filepath: string): boolean {
+                    
+
+                    return fs.existsSync(filepath);
+                },
+
+                async readFile(filepath: string): Promise<string> {
+                    
+                    return new Promise((resolve, reject) => {
+                        fs.readFile(filepath, 'utf8', (err, data) => {
+                            if (err) {
+                                reject(err);
+                            } else {
+                                resolve(data);
+                            }
+                        });
+                    });
+                },
+
+                readFileSync(filepath: string): string {
+                    
+
+                    return fs.readFileSync(filepath, 'utf8');
+                },
+
+                resolve(dir: string, file: string, ext: string): string {
+                                        
+                    // Always prepend underscore to the file name
+                    var fullPath = path.resolve(path.join(dir, file));
+                    const dirName = path.dirname(fullPath);
+                    var splitPath = fullPath.split('\\');
+                    const filePath = path.join(dirName, `_${splitPath[splitPath.length - 1]}.${ext}`);
+                    fullPath = path.resolve(filePath);
+                                        
+
+                    if (!this.contains?.(dir, fullPath)) {
+                        throw new Error('Illegal template path');
+                    }
+
+                    return fullPath;
+                },
+
+                contains(root: string, file: string): boolean {
+
+                    const relative = path.relative(root, file);
+                    return !!relative && !relative.startsWith('..') && !path.isAbsolute(relative);
+                },
+
+                dirname(file: string): string {
+                    return path.dirname(file);
+                }
+            }
         });
 
         const parsedData = JSON.parse(jsonData);
