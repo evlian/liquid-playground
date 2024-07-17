@@ -69,8 +69,6 @@ async function renderLiquidTemplate(templateFilePath: string, liquidTemplate: st
             extname: 'liquid',
             fs: {
                 async exists(filepath: string): Promise<boolean> {
-                    
-
                     return new Promise((resolve) => {
                         fs.access(filepath, fs.constants.F_OK, (err) => {
                             resolve(!err);
@@ -79,8 +77,6 @@ async function renderLiquidTemplate(templateFilePath: string, liquidTemplate: st
                 },
 
                 existsSync(filepath: string): boolean {
-                    
-
                     return fs.existsSync(filepath);
                 },
 
@@ -104,14 +100,15 @@ async function renderLiquidTemplate(templateFilePath: string, liquidTemplate: st
                 },
 
                 resolve(dir: string, file: string, ext: string): string {
-                                        
-                    // Always prepend underscore to the file name
+                    
                     var fullPath = path.resolve(path.join(dir, file));
                     const dirName = path.dirname(fullPath);
                     var splitPath = fullPath.split('\\');
-                    const filePath = path.join(dirName, `_${splitPath[splitPath.length - 1]}.${ext}`);
+                    var filePrepend = "_";
+
+                    const filePath = path.join(dirName, `${filePrepend}${splitPath[splitPath.length - 1]}.${ext}`);
+                    
                     fullPath = path.resolve(filePath);
-                                        
 
                     if (!this.contains?.(dir, fullPath)) {
                         throw new Error('Illegal template path');
