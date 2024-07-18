@@ -16,14 +16,14 @@
   "contributes": {
     "commands": [
       {
-        "command": "liquidplayground.openLiquidPlayground",
-        "title": "Open In Liquid Playground"
+        "command": "liquidplayground.launchPlayground",
+        "title": "Launch Playground"
       }
     ],
     "menus": {
       "explorer/context": [
         {
-          "command": "liquidplayground.openLiquidPlayground",
+          "command": "liquidplayground.launchPlayground",
           "when": "resourceLangId == liquid",
           "group": "navigation"
         }
