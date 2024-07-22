@@ -18,7 +18,11 @@
       {
         "command": "liquidplayground.launchPlayground",
         "title": "Launch Playground"
-      }
+      },
+      {
+        "command": "liquid-playground.openPlayground",
+        "title": "Open Liquid Playground"
+    }
     ],
     "menus": {
       "explorer/context": [
