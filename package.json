@@ -4,7 +4,7 @@
   "description": "An extension that enables you to interact with liquid directly from VSCode.",
   "icon": "images/logo.png",
   "publisher": "evlian",
-  "version": "1.6.2",
+  "version": "1.6.3",
   "engines": {
     "vscode": "^1.90.0"
   },
