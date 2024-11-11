@@ -5,7 +5,6 @@ import { parseAsJson } from "./filters/parse_as_json";
 import { newGuid } from "./filters/new_guid";
 import { maskString } from "./filters/mask_string";
 import { push } from "./filters/push";
-import { performChatRequest, performChatRequestSync } from "./filters/prompt";
 
 export async function renderLiquidTemplate(templateFilePath: string, liquidTemplate: string, jsonData: string): Promise<string> {
     try {
@@ -23,7 +22,6 @@ export async function renderLiquidTemplate(templateFilePath: string, liquidTempl
         engine.registerFilter("new_guid", () => newGuid());
         engine.registerFilter("mask_string", (code, length = 6) => maskString(code, length));
         engine.registerFilter('push', (array: any[], value: any) => push(array, value));
-        engine.registerFilter("prompt", async (value) => await performChatRequest(value));
 
         const parsedData = JSON.parse(jsonData);
         return await engine.parseAndRender(liquidTemplate, parsedData);

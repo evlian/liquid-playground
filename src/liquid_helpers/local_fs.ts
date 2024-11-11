@@ -39,25 +39,27 @@ export class LocalFs implements FS {
     }
 
     resolve(dir: string, file: string, ext: string): string {
-        
-        var fullPath = path.resolve(path.join(dir, file));
+        // Get the full normalized path
+        const fullPath = path.resolve(path.join(dir, file));
         const dirName = path.dirname(fullPath);
-        var splitPath = fullPath.split('\\');
-
-        var filePath = path.join(dirName, `${splitPath[splitPath.length - 1]}.${ext}`);
-
-        if (!fs.existsSync(filePath))
-        {
-            filePath = path.join(dirName, `${this.filePrependChar}${splitPath[splitPath.length - 1]}.${ext}`);
-        }
+        const baseName = path.basename(fullPath);
         
-        fullPath = path.resolve(filePath);
-
-        if (!this.contains?.(dir, fullPath)) {
+        // Try both variations of the filename
+        const normalPath = path.join(dirName, `${baseName}.${ext}`);
+        const prependedPath = path.join(dirName, `${this.filePrependChar}${baseName}.${ext}`);
+        
+        // Check first for normal path, then prepended path
+        let finalPath = fs.existsSync(normalPath) ? normalPath : prependedPath;
+        
+        // Resolve the final path
+        finalPath = path.resolve(finalPath);
+        
+        // Security check
+        if (!this.contains(dir, finalPath)) {
             throw new Error('Illegal template path');
         }
-
-        return fullPath;
+        
+        return finalPath;
     }
 
     contains(root: string, file: string): boolean {
